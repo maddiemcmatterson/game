@@ -4,8 +4,9 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { initializeProfileDB, addProfile, updateProfile, getProfiles } from './clientDatabase/sqliteDatabase';
 import AppNavigator from './navigation/AppNavigator';
+import { initializeDatabase } from './clientDatabase/initializeDatabase';
+import { queryProfiles } from './clientDatabase/sqliteDatabase';
 
 
 export default function App(props) {
@@ -21,8 +22,8 @@ export default function App(props) {
       />
     );
   } else {
-    initializeDatabase(true);
-
+    console.log('APP IS LOADED...');
+    initializeDatabase(true, () => {});
 
     return (
       <View style={styles.container}>
@@ -54,11 +55,6 @@ function handleLoadingError(error) {
 
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
-}
-
-function initializeDatabase(override) {
-  initializeProfileDB(override);
-  getProfiles(_ => console.log(JSON.stringify(_)));
 }
 
 const styles = StyleSheet.create({

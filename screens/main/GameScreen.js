@@ -1,11 +1,15 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import Layout from '../../constants/Layout';
+import LettersIcon from '../games/letters/LettersIcon';
+import NumbersIcon from '../games/numbers/NumbersIcon';
+import WordsIcon from '../games/words/WordsIcon';
 import { withNavigationFocus } from 'react-navigation';
+import Constants from '../../constants/Constants';
+import MainStyles from './MainStyles';
+
 import {
   Image,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -15,14 +19,28 @@ import { MonoText } from '../../components/StyledText';
 
 class GameScreen extends React.Component {
 
-  state = {};
+  constructor(props) {
 
-  componentDidMount() { this.update(); }
+    super(props);
+
+    this.state = {
+      games: Constants.games,
+      activeProfile: null,
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.activeProfile === undefined) {
+      this.setState({ activeProfile: Constants.profiles.DEFAULT_GUEST_UID });
+    }
+    else {
+      this.setState({ activeProfile: this.props.activeProfile });
+    }    
+  }
 
   componentDidUpdate() {
     if (this.props.isFocused) {
       console.log('GAME SCREEN...');
-      console.log(JSON.stringify(this.props));
     }
   }
 
@@ -32,75 +50,27 @@ class GameScreen extends React.Component {
 
     return (
 
-      <View style={styles.container}>
-        <Text style={styles.heading}>Games</Text>
-        <View style={styles.mainContainer}>
-          <ScrollView style={styles.contentContainer}>
-            
-            <TouchableOpacity onPress={handleHelpPress} style={styles.gameImagePress}>
-              <Image source={require('../../assets/images/random-letters.png')} style={styles.gameImage}/>
-            </TouchableOpacity>
-            
-            <TouchableOpacity onPress={handleHelpPress} style={styles.gameImagePress}>
-              <Image source={require('../../assets/images/random-numbers.jpg')} style={styles.gameImage}/>
-            </TouchableOpacity>
-
-          </ScrollView>    
+      <View style={MainStyles.container}>
+        <Text style={MainStyles.heading}>Games</Text>
+        <View style={MainStyles.mainContainer}>
+          <ScrollView
+            style={MainStyles.contentContainer}
+            showsVerticalScrollIndicator={false}>
+            <LettersIcon gameInfo={ this.state.games.LETTERS }/>
+            <NumbersIcon gameInfo={ this.state.games.NUMBERS }/>
+            <WordsIcon gameInfo={ this.state.games.WORDS }/>
+          </ScrollView>
         </View>
       </View>
     );
   }
 
-  update() {}
-
+  update() {
+    console.log(this.state);
+  }
 }
 
 GameScreen.navigationOptions = {};
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://www.google.com'
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    alignContent: 'center',
-    backgroundColor: 'floralwhite',
-    flex: 1,
-    paddingTop: 20,
-  },
-  heading: {
-    fontSize: 32,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  
-  mainContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-  },
-
-  gameImage: {
-    height: 0.25*Layout.window.height,
-    aspectRatio: 1,
-    resizeMode: 'cover',
-    marginTop: 0.05*Layout.window.height,
-  },
-  
-  gameImagePress: {
-  },
-
-  titleText: {
-    alignItems: 'center',
-    marginHorizontal: 25,
-    marginTop: 50,
-    fontSize: 32,
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-  },
-});
 
 export default withNavigationFocus(GameScreen);
 

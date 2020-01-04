@@ -7,7 +7,13 @@ import TabBarIcon from '../components/TabBarIcon';
 import GameScreen from '../screens/main/GameScreen';
 import ProfileScreen from '../screens/main/ProfileScreen';
 import SettingsScreen from '../screens/main/SettingsScreen';
-import NewProfileScreen from '../screens/main/NewProfileScreen';
+import PassCodeScreen from '../screens/profiles/PassCodeScreen';
+import NewProfileScreen from '../screens/profiles/NewProfileScreen';
+import LettersScreen from '../screens/games/letters/LettersScreen';
+import MatchLettersScreen from '../screens/games/letters/matchLetters/MatchLettersScreen';
+import NumbersScreen from '../screens/games/numbers/NumbersScreen';
+import WordsScreen from '../screens/games/words/WordsScreen';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -18,6 +24,7 @@ const ProfileStack = createStackNavigator(
   {
     Home: { screen: ProfileScreen },
     NewProfile: { screen: NewProfileScreen },
+    PassCode: { screen: PassCodeScreen },
   },
   config
 );
@@ -33,7 +40,11 @@ ProfileStack.path = '';
 
 const GameStack = createStackNavigator(
   {
-    Games: GameScreen,
+    Games: { screen: GameScreen },
+    Letters: { screen: LettersScreen },
+    Numbers: { screen: NumbersScreen },
+    Words: { screen: WordsScreen  },
+    MatchLetters: { screen: MatchLettersScreen }
   },
   config
 );
