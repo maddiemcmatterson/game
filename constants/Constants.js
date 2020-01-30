@@ -14,11 +14,23 @@ const DEFAULT_PROFILE_IMAGE = require(DEFAULT_PROFILE_IMAGE_PATH);
 const LETTERS_IMAGE_PATH = '../assets/images/random-letters.png';
 const LETTERS_IMAGE = require(LETTERS_IMAGE_PATH);
 
-const MATCH_LETTERS_IMAGE_PATH = '../assets/images/match-letters.jpg';
+const MATCH_LETTERS_IMAGE_PATH = '../assets/images/match.jpg';
 const MATCH_LETTERS_IMAGE = require(MATCH_LETTERS_IMAGE_PATH);
+
+const MEMORY_LETTERS_IMAGE_PATH = '../assets/images/memory.jpg';
+const MEMORY_LETTERS_IMAGE = require(MEMORY_LETTERS_IMAGE_PATH);
 
 const NUMBERS_IMAGE_PATH = '../assets/images/random-numbers.jpg';
 const NUMBERS_IMAGE = require(NUMBERS_IMAGE_PATH);
+
+const NUMBERS_ADDITION_IMAGE_PATH = '../assets/images/addition.jpg';
+const NUMBERS_ADDITION_IMAGE = require(NUMBERS_ADDITION_IMAGE_PATH);
+
+const NUMBERS_SUBTRACTION_IMAGE_PATH = '../assets/images/subtraction.jpg';
+const NUMBERS_SUBTRACTION_IMAGE = require(NUMBERS_SUBTRACTION_IMAGE_PATH);
+
+const NUMBERS_MULTIPLICATION_IMAGE_PATH = '../assets/images/multiplication.jpg';
+const NUMBERS_MULTIPLICATION_IMAGE = require(NUMBERS_MULTIPLICATION_IMAGE_PATH);
 
 const WORDS_IMAGE_PATH = '../assets/images/random-words.jpg';
 const WORDS_IMAGE = require(WORDS_IMAGE_PATH);
@@ -48,16 +60,38 @@ export default {
 					'NAME': 'MATCH_LETTERS',
 					'IMAGE': MATCH_LETTERS_IMAGE,
 				},
-			}
+				'MEMORY_LETTERS': {
+					'NAME': 'MEMORY_LETTERS',
+					'IMAGE': MEMORY_LETTERS_IMAGE,
+				},
+			},
 		},
 		'NUMBERS': {
 			'NAME': 'NUMBERS',
 			'IMAGE': NUMBERS_IMAGE,
+			'GAMES': {
+				'ADDITION': {
+					'NAME': 'ADDITION',
+					'IMAGE': NUMBERS_ADDITION_IMAGE,
+				},
+				'SUBTRACTION': {
+					'NAME': 'SUBTRACTION',
+					'IMAGE': NUMBERS_SUBTRACTION_IMAGE,
+				},
+				'MULTIPLICATION': {
+					'NAME': 'MULTIPLICATION',
+					'IMAGE': NUMBERS_MULTIPLICATION_IMAGE,
+				},
+				'DIVISION': {
+					'NAME': 'DIVISION',
+					'IMAGE': NUMBERS_SUBTRACTION_IMAGE,
+				},
+			},
 		},
 		'WORDS': {
 			'NAME': 'WORDS',
 			'IMAGE': WORDS_IMAGE,
-		}
+		},
 	},
 	'passcode': {
 		'DEFAULT_PASSCODE_LENGTH': DEFAULT_PASSCODE_LENGTH,

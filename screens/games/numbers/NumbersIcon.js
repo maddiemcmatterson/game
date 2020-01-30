@@ -17,7 +17,8 @@ class NumbersIcon extends React.Component {
   }
 
   select() {
-    this.props.navigation.navigate('Numbers');
+    console.log('NumbersIcon', this.props);
+    this.props.navigation.navigate('Numbers', {'gameInfo': this.props.gameInfo.GAMES});
   }
 
   getImages() {
@@ -27,11 +28,11 @@ class NumbersIcon extends React.Component {
   render() {
 
     return (
-        <View style={GameIconStyle.container}>
-          <TouchableOpacity onPress={this.select} style={GameIconStyle.gameImagePress}>
+        <View style={GameIconStyle.gamesContainer}>
+          <TouchableOpacity onPress={this.select} style={GameIconStyle.gamesImagePress}>
             <Image
               source={ this.getImages() }
-              style={GameIconStyle.gameImage}/>
+              style={GameIconStyle.gamesImage}/>
           </TouchableOpacity>
         </View>
     );

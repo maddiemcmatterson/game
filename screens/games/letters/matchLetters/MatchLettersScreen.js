@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Modal, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import Icon from "react-native-vector-icons/Ionicons";
 import { withNavigationFocus } from 'react-navigation';
 import GameIconStyle from '../../GameIconStyle';
 import Constants from '../../../../constants/Constants';
 import Layout from '../../../../constants/Layout';
 import * as GameUtils from '../../utils/GameUtils';
+import InstructionsModalContent from '../../modals/InstructionsModalContent';
+import SuccessModalContent from '../../modals/SuccessModalContent';
+import * as Font from 'expo-font';
 
 
 const KEY_SEP = ':';
@@ -15,34 +19,49 @@ class MatchLettersScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      letterCountOptions: [{id:4}, {id:6}],
+      letterCountOptions: [
+        {id:4, difficulty: 'Easy'},
+        {id:5, difficulty: 'Medium'},
+        {id:6, difficulty: 'Hard'}],
       activeLetterCount: 4,
       currentLetters: null,
       lowerCaseFirst: false,
       prevSelection: null,
       inactiveLetters: [],
+      successVisible: false,
+      instructionsVisible: true,
+      instructions: 'Match Uppercase and Lowercase Letters...',
     };
+
+    this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
+    this.toggleInstructionsModal = this.toggleInstructionsModal.bind(this);
+    this.setActiveCount = this.setActiveCount.bind(this);
   }
 
   componentDidMount() {
+    this.getRandomLetters();
+  }
+
+  componentDidUpdate() {
     if (this.state.currentLetters === null) {
-      this.getRandomLetters(this.state.activeLetterCount);
+      this.getRandomLetters();
     }
   }
 
-  componentDidUpdate() {}
-
   setActiveCount(val) {
-    this.setState({ activeLetterCount: val});
-    this.getRandomLetters(val);
+    this.setState({
+      activeLetterCount: val,
+      currentLetters: null
+    });
   }
 
   renderChoice(option) {
     return (
       <TouchableOpacity
+        key={ option.id }
         style={ styles.choiceButton }
         onPress={() =>  this.setActiveCount(option.id)}>
-        <Text key={ option.id }>{ option.id }</Text>
+        <Text key={ option.id }>{ option.difficulty }</Text>
       </TouchableOpacity>
       );
   }
@@ -55,28 +74,18 @@ class MatchLettersScreen extends React.Component {
   }
 
   resetGame() {
+    this.setState({ successVisible: true });
     this.setState({ prevSelection: null });
     this.setState({ inactiveLetters: []});
-    this.getRandomLetters(this.state.activeLetterCount);
+    this.getRandomLetters();
   }
 
   randomize(array) {
       return GameUtils.randomizeArray(array);
   }
 
-  getRandomLetters(val) {
-    var letters =
-      Math.random()
-      .toString(36)
-      .replace(/[^a-z]+/g, '')
-      .substring(0, val);
-
-    var cnt = 0;
-    var array = [];
-    for (var letter of letters) {
-      array.push({id:cnt, letter:letter});
-      cnt += 1;
-    }
+  getRandomLetters() {
+    var array = GameUtils.getRandomLetters(this.state.activeLetterCount);
     this.setState({ currentLetters: {'set_one': array, 'set_two': GameUtils.randomizeArray(array)} });
     this.setState({ lowerCaseFirst: Boolean(Math.round(Math.random())) });
   }
@@ -100,6 +109,8 @@ class MatchLettersScreen extends React.Component {
   }
 
   checkSelect(key) {
+    console.log(key);
+    console.log(this.state.prevSelection);
     var prevSelection = this.state.prevSelection
     if ( prevSelection !== null) {
       var [id, upperCase, letter] = this.extractKeyValues(key);
@@ -108,13 +119,20 @@ class MatchLettersScreen extends React.Component {
         var inactiveLetters = this.state.inactiveLetters;
         inactiveLetters.push(key)
         inactiveLetters.push(this.state.prevSelection);
-        this.setState({ inactiveLetters });
+        console.log('MATCH...');
+        this.setState({
+          inactiveLetters: inactiveLetters,
+          prevSelection: null
+        });
+      } else {
+        this.setState({prevSelection: key});
       }
+    } else {
+      this.setState({prevSelection: key});
     }
     if (this.completed()) {
       this.resetGame();
     }
-    this.setState({prevSelection: key});
   }
 
   renderLetter(id, letter, upperCase) {
@@ -131,16 +149,17 @@ class MatchLettersScreen extends React.Component {
           marginHorizontal: 5,
           borderRadius: 5,
           minWidth: 50,
+          alignItems: 'center',
         }}
         onPress={(event) => {
           if (color !== DISABLED_COLOR) {
-            console.log(key);
             this.checkSelect(key);
           }
         }}
       >
-        <View>
-          <Text style={ styles.letter }>{ this.randomizeCase(upperCase) ? letter.toUpperCase() : letter }</Text>
+        <View key={ key }>
+          <Text key={ key } style={{ fontSize: 18}}>
+            { this.randomizeCase(upperCase) ? letter.toUpperCase() : letter }</Text>
         </View>
       </TouchableOpacity>
     );
@@ -150,6 +169,14 @@ class MatchLettersScreen extends React.Component {
     return (upperCase^this.state.lowerCaseFirst)
   }
 
+  toggleSuccessModal() {
+    this.setState({ successVisible: !this.state.successVisible });
+  }
+
+  toggleInstructionsModal() {
+    this.setState({ instructionsVisible: !this.state.instructionsVisible });
+  }
+
   render() {
 
     if (this.state.currentLetters === null){
@@ -157,9 +184,26 @@ class MatchLettersScreen extends React.Component {
     }
 
     return (
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
+        <Modal
+          animationType="none"
+          transparent={false}
+          visible={this.state.successVisible}
+          onRequestClose={() => {}}>
+          <SuccessModalContent
+            toggleSuccessModal = { this.toggleSuccessModal }/>
+        </Modal>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.instructionsVisible}
+          onRequestClose={() => {}}>
+          <InstructionsModalContent
+            instructions = { this.state.instructions }
+            toggleInstructionsModal = { this.toggleInstructionsModal }/>
+        </Modal>
         <View style={styles.subtitle}>
-          <Text style={ styles.subtitle }>Select Option</Text>
+          <Text style={ styles.subtitle }>Select Difficulty</Text>
           <View style={ styles.flatList }>
             { this.state.letterCountOptions.map( option => this.renderChoice(option) ) }
           </View>
@@ -174,7 +218,7 @@ class MatchLettersScreen extends React.Component {
             { this.state.currentLetters.set_two.map( letterInfo => this.renderLetter(letterInfo.id, letterInfo.letter, true)) }
           </View>
         </View>
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }
@@ -222,17 +266,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     minWidth: 50,
   },
-  letter: {
-    fontSize: 36,
-  },
   flatListLetters: {
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'floralwhite',
   },
   letterRow: {
-    paddingTop: 0.1*Layout.window.height,
+    paddingTop: 0.05*Layout.window.height,
+    paddingBottom: 0.0125*Layout.window.height,
     fontSize: 24,
     alignItems: 'center'
+  },
+  modalTextContinue: {
+    marginTop: 20,
+    color: 'blue',
+    textAlign: 'center',
+    fontSize: 18,
+  },
+  modalText: {
+    marginTop: 24,
+    textAlign: 'center',
+    fontSize: 18,
   },
 });

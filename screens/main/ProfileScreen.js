@@ -24,9 +24,9 @@ class ProfileScreen extends React.Component {
   render() {
 
     return (
-      <View style={MainStyles.container}>
-        <Text style={MainStyles.heading}>{ Title }</Text>
-        <View style={MainStyles.listArea}>
+      <View style={MainStyles.mainContainer}>
+        <Text style={MainStyles.mainHeading}>{ Title }</Text>
+        <View style={MainStyles.mainListArea}>
           <ProfileHandler func = { this.update } />
         </View>
       </View>

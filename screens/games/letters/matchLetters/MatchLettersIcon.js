@@ -12,8 +12,6 @@ class MatchLettersIcon extends React.Component {
 
     this.select = this.select.bind(this);
     this.getImages = this.getImages.bind(this);
-
-    console.log(this.props);
   }
 
   select() {
@@ -27,9 +25,9 @@ class MatchLettersIcon extends React.Component {
   render() {
 
     return (
-        <View style={GameIconStyle.container}>
+        <View style={GameIconStyle.gamesContainer}>
           <TouchableOpacity onPress={this.select} style={GameIconStyle.gameImagePress}>
-            <Image source={ this.getImages() } style={ GameIconStyle.gameImage }/>
+            <Image source={ this.getImages() } style={ GameIconStyle.gamesImage }/>
           </TouchableOpacity>
         </View>
     );

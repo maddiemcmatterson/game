@@ -27,11 +27,11 @@ class WordsIcon extends React.Component {
   render() {
 
     return (
-        <View style={GameIconStyle.container}>
-          <TouchableOpacity onPress={this.select} style={GameIconStyle.gameImagePress}>
+        <View style={GameIconStyle.gamesContainer}>
+          <TouchableOpacity onPress={this.select} style={GameIconStyle.gamesImagePress}>
             <Image
               source={ this.getImages() }
-              style={GameIconStyle.gameImage}/>
+              style={GameIconStyle.gamesImage}/>
           </TouchableOpacity>
         </View>
     );

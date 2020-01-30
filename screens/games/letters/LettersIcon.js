@@ -27,14 +27,14 @@ class LettersIcon extends React.Component {
   render() {
 
     return (
-        <View style={GameIconStyle.container}>
+        <View style={GameIconStyle.gamesContainer}>
           <TouchableOpacity
             onPress={this.select}
-            style={GameIconStyle.gameImagePress}
+            style={GameIconStyle.gamesImagePress}
           >
             <Image
               source={ this.getImages() }
-              style={GameIconStyle.gameImage}/>
+              style={GameIconStyle.gamesImage}/>
           </TouchableOpacity>
         </View>
     );

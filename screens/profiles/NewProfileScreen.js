@@ -102,7 +102,7 @@ class NewProfileScreen extends React.Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <View style={styles.profileContainer}>
         <Modal
           animationType="slide"
           transparent={false}
@@ -112,7 +112,7 @@ class NewProfileScreen extends React.Component {
           }}>
           <View>
             <View style={styles.modalView} >
-              <Text style={styles.modalText} >Please Enter Full Name</Text>
+              <Text style={styles.modalText}>Please Enter Full Name</Text>
 
               <TouchableOpacity onPress={this.toggleFailure} style={styles.buttonPress}>
                 <Text style={styles.buttonText}>Continue</Text>
@@ -152,13 +152,15 @@ class NewProfileScreen extends React.Component {
   }
 }
 
+const MARGIN = 0.0125*Layout.window.height;
+
 
 NewProfileScreen.navigationOptions = {};
 
 
 const styles = StyleSheet.create({
 
-  container: {
+  profileContainer: {
     alignItems: 'center',
     marginTop: 20,
     marginBottom: 20,

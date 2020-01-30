@@ -1,41 +1,50 @@
 import { StyleSheet } from 'react-native';
 import Layout from '../../constants/Layout';
 
-const MARGIN = 0.0125*Layout.window.height;
-const IMAGE_SIZE = 0.25*Layout.window.height;
+const MARGIN = 0.025*Layout.window.height;
+const IMAGE_SIZE = 0.2*Layout.window.height;
 
 export default StyleSheet.create({
 
 
-  container: {
+  gamesContainer: {
     backgroundColor: 'floralwhite',
     alignItems: 'center',
-    paddingTop: 20,
     flex: 1,
   },
   
-  gameImage: {
+  gamesImage: {
     height: IMAGE_SIZE,
     aspectRatio: 1,
     resizeMode: 'cover',
-    marginTop: MARGIN,
+    margin: MARGIN,
+
   },
   
-  gameImagePress: {
+  gamesImagePress: {
   },
 
-  titleText: {
+  gamesTitleText: {
     marginHorizontal: 25,
-    marginTop: 50,
     fontSize: 32,
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: "center",
   },
 
-  heading: {
+  gamesListArea: {
+    backgroundColor: "#f0f0f0",
+    flex: 1,
+    paddingTop: 16,
+    backgroundColor: 'floralwhite',
+  },
+
+  gamesHeading: {
+    marginHorizontal: 25,
+    marginTop: MARGIN,
     fontSize: 32,
-    fontWeight: "bold",
+    fontStyle: 'normal',
+    fontWeight: 'bold',
     textAlign: "center",
   },
 });

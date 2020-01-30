@@ -5,7 +5,7 @@ import NumbersIcon from '../games/numbers/NumbersIcon';
 import WordsIcon from '../games/words/WordsIcon';
 import { withNavigationFocus } from 'react-navigation';
 import Constants from '../../constants/Constants';
-import MainStyles from './MainStyles';
+import GameIconStyle from '../games/GameIconStyle';
 
 import {
   Image,
@@ -50,11 +50,11 @@ class GameScreen extends React.Component {
 
     return (
 
-      <View style={MainStyles.container}>
-        <Text style={MainStyles.heading}>Games</Text>
-        <View style={MainStyles.mainContainer}>
+      <View style={GameIconStyle.gamesContainer}>
+        <Text style={GameIconStyle.gamesHeading}>Games</Text>
+        <View style={GameIconStyle.gamesListArea}>
           <ScrollView
-            style={MainStyles.contentContainer}
+            style={GameIconStyle.contentContainer}
             showsVerticalScrollIndicator={false}>
             <LettersIcon gameInfo={ this.state.games.LETTERS }/>
             <NumbersIcon gameInfo={ this.state.games.NUMBERS }/>

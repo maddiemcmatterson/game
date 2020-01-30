@@ -3,7 +3,6 @@ import {
   Image,
   Platform,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -11,7 +10,7 @@ import {
 
 export default function SettingsScreen() {
 return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       {/**
        * Go ahead and delete ExpoLinksView and replace it with your content;
        * we just wanted to provide you with some helpful links.
@@ -22,10 +21,3 @@ return (
 
 SettingsScreen.navigationOptions = {};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: 'floralwhite',
-  },
-});

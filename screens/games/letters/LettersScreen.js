@@ -3,11 +3,15 @@ import { StyleSheet, Text, View, ScrollView, RefreshControl } from 'react-native
 import { withNavigationFocus } from 'react-navigation';
 import GameIconStyle from '../GameIconStyle';
 import MatchLettersIcon from './matchLetters/MatchLettersIcon';
+import MemoryLettersIcon from './memoryLetters/MemoryLettersIcon';
+
 
 class LettersScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    console.log(this.props);
 
     this.state = {
       gameInfo: this.props.navigation.state.params.gameInfo,
@@ -21,13 +25,16 @@ class LettersScreen extends React.Component {
   render() {
 
     return (
-      <View style={GameIconStyle.container}>
-        <Text style={GameIconStyle.heading}>Letter Games</Text>
-        <ScrollView
-            style={GameIconStyle.contentContainer}
+      <View style={GameIconStyle.gamesContainer}>
+        <Text style={GameIconStyle.gamesHeading}>Letter Games</Text>
+        <View style={GameIconStyle.gamesListArea}>
+          <ScrollView
+            style={GameIconStyle.gamesContentContainer}
             showsVerticalScrollIndicator={false}>
             <MatchLettersIcon gameInfo={ this.state.gameInfo.MATCH_LETTERS } callback={ this.toggleShowHeader }/>
+            <MemoryLettersIcon gameInfo={ this.state.gameInfo.MEMORY_LETTERS } callback={ this.toggleShowHeader }/>
           </ScrollView>
+        </View>
       </View>
     )
   }

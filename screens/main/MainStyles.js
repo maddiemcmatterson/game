@@ -5,35 +5,29 @@ const MARGIN = 0.0125*Layout.window.height;
 const IMAGE_SIZE = 0.25*Layout.window.height;
 
 export default StyleSheet.create({
-  container: {
+  mainContainer: {
     alignContent: 'center',
     backgroundColor: 'floralwhite',
     flex: 1,
     paddingTop: 20,
   },
 
-  heading: {
+  mainHeading: {
     marginHorizontal: 25,
-    marginTop: 50,
+    marginTop: MARGIN,
     fontSize: 32,
     fontStyle: 'normal',
     fontWeight: 'bold',
     textAlign: "center",
   },
-  
-  mainContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-  },
 
-  contentContainer: {
+  mainContentContainer: {
     aspectRatio: 1,
     resizeMode: 'cover',
     marginTop: MARGIN,
   },
 
-  listArea: {
+  mainListArea: {
     backgroundColor: "#f0f0f0",
     flex: 1,
     paddingTop: 16,
