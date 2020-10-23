@@ -53,14 +53,7 @@ export function getRandomString(size) {
   return letters.substring(0, size);
 }
 
-
-export function getRandomLetters(size) {
-
-  var letters = '';
-  while (letters.length < size) {
-    letters += _getRandomLetters(size);
-  }
-
+function _build_array(letters, size) {
   var cnt = 0;
   var array = [];
   for (var letter of letters.substring(0, size)) {
@@ -68,4 +61,26 @@ export function getRandomLetters(size) {
     cnt += 1;
   }
   return array;
+}
+
+export function getUniqueRandomLetters(size) {
+  var letters = '';
+  while (letters.length < size) {
+    _getRandomLetters(size).split('').forEach( letter => {
+      if (!letters.includes(letter)) {
+        letters += letter;
+      }
+    })
   }
+  return _build_array(letters, size);
+}
+
+
+export function getRandomLetters(size) {
+
+  var letters = '';
+  while (letters.length < size) {
+    letters += _getRandomLetters(size);
+  }
+  return _build_array(letters, size);
+}

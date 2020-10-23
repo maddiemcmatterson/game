@@ -7,13 +7,7 @@ import { withNavigationFocus } from 'react-navigation';
 import Constants from '../../constants/Constants';
 import GameIconStyle from '../games/GameIconStyle';
 
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View, } from 'react-native';
 import { MonoText } from '../../components/StyledText';
 
 

@@ -17,6 +17,9 @@ const LETTERS_IMAGE = require(LETTERS_IMAGE_PATH);
 const MATCH_LETTERS_IMAGE_PATH = '../assets/images/match.jpg';
 const MATCH_LETTERS_IMAGE = require(MATCH_LETTERS_IMAGE_PATH);
 
+const IDENTIFY_LETTERS_IMAGE_PATH = '../assets/images/identify.jpg';
+const IDENTIFY_LETTERS_IMAGE = require(IDENTIFY_LETTERS_IMAGE_PATH);
+
 const MEMORY_LETTERS_IMAGE_PATH = '../assets/images/memory.jpg';
 const MEMORY_LETTERS_IMAGE = require(MEMORY_LETTERS_IMAGE_PATH);
 
@@ -63,6 +66,10 @@ export default {
 				'MEMORY_LETTERS': {
 					'NAME': 'MEMORY_LETTERS',
 					'IMAGE': MEMORY_LETTERS_IMAGE,
+				},
+				'IDENTIFY_LETTERS': {
+					'NAME': 'IDENTIFY_LETTERS',
+					'IMAGE': IDENTIFY_LETTERS_IMAGE,
 				},
 			},
 		},

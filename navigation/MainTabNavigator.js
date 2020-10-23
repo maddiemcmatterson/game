@@ -12,6 +12,7 @@ import NewProfileScreen from '../screens/profiles/NewProfileScreen';
 import LettersScreen from '../screens/games/letters/LettersScreen';
 import MatchLettersScreen from '../screens/games/letters/matchLetters/MatchLettersScreen';
 import MemoryLettersScreen from '../screens/games/letters/memoryLetters/MemoryLettersScreen';
+import IdentifyLettersScreen from '../screens/games/letters/identifyLetters/IdentifyLettersScreen';
 import NumbersScreen from '../screens/games/numbers/NumbersScreen';
 import AdditionNumbersScreen from '../screens/games/numbers/arithmeticNumbers/AdditionNumbersScreen';
 import SubtractionNumbersScreen from '../screens/games/numbers/arithmeticNumbers/SubtractionNumbersScreen';
@@ -50,6 +51,7 @@ const GameStack = createStackNavigator(
     Words: { screen: WordsScreen  },
     MatchLetters: { screen: MatchLettersScreen },
     MemoryLetters: { screen: MemoryLettersScreen },
+    IdentifyLetters: { screen: IdentifyLettersScreen },
     Addition: { screen: AdditionNumbersScreen },
     Subtraction: { screen: SubtractionNumbersScreen },
     Multiplication: { screen: MultiplicationNumbersScreen }
